@@ -1,0 +1,34 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import NextApp from './NextApp';
+import registerServiceWorker from './registerServiceWorker';
+
+// Add this import:
+
+// import { AppContainer } from 'react-hot-loader';
+// import {hot} from 'react-hot-loader/root'
+// Wrap the rendering in a function:
+const render = PureComponent => {
+
+
+  ReactDOM.render(
+    <NextApp />,
+    document.getElementById('root')
+  );
+
+};
+
+// Do this once
+registerServiceWorker();
+
+// Render once
+render(NextApp);
+
+// Webpack Hot Module Replacement API
+// if (module.hot) {
+//   module.hot.accept('./NextApp', () => {
+    
+//     render(NextApp);
+//   });
+// }
+

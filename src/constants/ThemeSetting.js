@@ -1,0 +1,43 @@
+// Customizer const
+export const THEME_TYPE = 'THEME_TYPE';
+export const THEME_TYPE_LITE = 'THEME_TYPE_LITE';
+export const THEME_TYPE_DARK = 'THEME_TYPE_DARK';
+export const THEME_TYPE_SEMI_DARK = 'THEME_TYPE_SEMI_DARK';
+
+
+export const THEME_COLOR_SELECTION = 'THEME_COLOR_SELECTION';
+export const THEME_COLOR_SELECTION_PRESET = 'THEME_COLOR_SELECTION_PRESET';
+export const THEME_COLOR_SELECTION_CUSTOMIZE = 'THEME_COLOR_SELECTION_CUSTOMIZE';
+
+export const NAV_STYLE = 'NAV_STYLE';
+export const HORIZONTAL_NAVIGATION = 'HORIZONTAL_NAVIGATION';
+
+export const HORIZONTAL_MENU_POSITION = 'HORIZONTAL_MENU_POSITION';
+export const ABOVE_THE_HEADER = 'ABOVE_THE_HEADER';
+export const INSIDE_THE_HEADER = 'INSIDE_THE_HEADER';
+export const BELOW_THE_HEADER = 'BELOW_THE_HEADER';
+
+export const VERTICAL_NAVIGATION = 'VERTICAL_NAVIGATION';
+export const NAV_STYLE_FIXED = 'NAV_STYLE_FIXED';
+export const NAV_STYLE_DRAWER = 'NAV_STYLE_DRAWER';
+export const NAV_STYLE_MINI = 'NAV_STYLE_MINI';
+
+export const LAYOUT_TYPE = 'LAYOUT_TYPE';
+export const LAYOUT_TYPE_FULL = 'LAYOUT_TYPE_FULL';
+export const LAYOUT_TYPE_BOXED = 'LAYOUT_TYPE_BOXED';
+export const LAYOUT_TYPE_FRAMED = 'LAYOUT_TYPE_FRAMED';
+
+
+export const INDIGO = '#3c1990';
+export const CYAN = '#13c2c2';
+export const AMBER = '#fadb14';
+export const DEEP_ORANGE = '#fa8c16';
+export const PINK = '#eb2f96';
+export const BLUE = '#1890ff';
+export const GREEN = '#52c41a';
+
+export const SHIFT_DATA='SHIFT_DATA';
+export const FULL_NAME='FULL_NAME';
+export const SET_TIME='SET_TIME';
+
+export const TAB_SIZE = 992;
