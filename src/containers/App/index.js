@@ -11,11 +11,9 @@ import AppLocale from "lngProvider";
 import MainApp from "./MainApp";
 import SignIn from "../../components/AppModule/Authentication/SignIn";
 import SignOut from "../../components/AppModule/Authentication/SignOut";
-import VerifyOTP from '../../components/AppModule/Authentication/VerifyOTP';
 import AccessDenied from "../../components/AppModule/ErrorPages/404";
 import SomethingWrong from "../../components/AppModule/ErrorPages/SomethingWrong";
 import SecurityThreat from "../../components/AppModule/ErrorPages/SecurityThreat";
-import ResetPassword from "../../components/AppModule/Authentication/ResetPassword";
 import { LAYOUT_TYPE_BOXED, LAYOUT_TYPE_FRAMED, LAYOUT_TYPE_FULL } from "../../constants/ThemeSetting";
 import AuthService from '../../service/AuthService';
 import ReactPlaceholder from "react-placeholder";
@@ -23,8 +21,6 @@ import CircularProgress from "../../components/AppModule/CircularProgress";
 import UserContext from '../../contexts/UserContext';
 import RestrictedRoute from "../../util/RestrictedRoute";
 import { CHECKVPN } from "../../service/Apiconfig";
-import ConfirmEmail from '../../components/AppModule/Authentication/ConfirmMail'
-import ChangePassword from '../../components/AppModule/Authentication/ChangePassword'
 import VPNService from '../../service/VPNService';
 import SessionWrong from "../../components/AppModule/ErrorPages/SessionWrong";
 import SignUp from "../../components/AppModule/Authentication/SignUp";
@@ -201,18 +197,12 @@ class App extends PureComponent {
                   <Route exact path={`/login`} render={props =>
                     !this.state.authenticated ? <React.Fragment><SignIn {...props} /></React.Fragment> : <Redirect to={`/main/items`} />
                   } />
-                  <Route path={`/invitation/confirm-email`} render={props =>
-                    !this.state.authenticated ? <React.Fragment><ConfirmEmail {...props} /></React.Fragment> : <Redirect to={`/main/items`} />} />
 
                   <Route path={`/logout`} render={props => <SignOut var={this.props.rabbitData} var1={this.props} />} />
 
-                  <Route path={`/verify-otp`} render={props =>
-                    !this.state.authenticated ? <React.Fragment><VerifyOTP {...props} /></React.Fragment> : <Redirect to={`/main/items`} />} />
                   <Route exact path={`/signup`}  render={props =>
                     <React.Fragment><SignUp {...props} /></React.Fragment>
                   } />
-                  <Route path={`/reset-password`} render={props => <ResetPassword {...props} />} />
-                  <Route path={`/change-password`} render={props => <ChangePassword {...props} />} />
                   <Route path={`/something-wrong`} component={SomethingWrong} />
                   <Route path={`/session-wrong`} component={SessionWrong} />
                   <Route path={`/security-threat`} component={SecurityThreat} />

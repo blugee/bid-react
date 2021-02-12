@@ -91,21 +91,6 @@ class Profile extends PureComponent {
     this.fetchData();
   };
 
-
-  handleChangePassword = async (formData) => {
-    this.setState({ loadingData: true });
-    const body = { email: formData }
-    const response = await AuthService.VerifyEmail(body);
-    if (response.status === urlConfig.SUCCESS_CODE) {
-      message.success('Mail sent');
-      this.props.history.replace(`/logout`)
-      this.setState({ submitted: true, loadingData: false });
-    } else {
-      message.success(response.message)
-      this.setState({ submitted: true, loadingData: false });
-    }
-  };
-
   handleCancel = e => {
     console.log(e);
     this.setState({
@@ -113,28 +98,7 @@ class Profile extends PureComponent {
     });
   };
 
-  showChangeConfirm = type => {
-    const that = this;
-    this.setState({ visiblemodel: true })
-    if (type === 'password') {
-      this.setState({
-        actionData: {
-          message: <IntlMessages id="password.entry" />, action: e => that.handleChangePassword(that.state.userData.email)
-        }
-      })
-    } else {
-      that.setState({ visible: true })
-      // that.handleResetOtp(that.state.userData.uid);
-    }
-
-  };
-
-  onActionChange = value => {
-    const actionValue = value.key;
-    if (actionValue === 'password' || actionValue === 'email') {
-      this.showChangeConfirm(actionValue);
-    }
-  };
+ 
   visibleModel = () => {
     this.setState({ visiblemodel: !this.state.visiblemodel })
   }
@@ -182,16 +146,7 @@ class Profile extends PureComponent {
                   {<IntlMessages id="button.back" />}
                 </Button>
               </FormItem>
-              {/* <FormItem>
-                <Button
-                  type='primary'
-                  htmlType="submit"
-                  onClick={(e) => this.handleSubmit(e)}
-                  loading={this.state.loadingData}
-                >
-                  <IntlMessages id="button.save.details" />
-                </Button>
-              </FormItem> */}
+             
             </Form>
           </div>
 

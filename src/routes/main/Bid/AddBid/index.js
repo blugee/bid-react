@@ -17,7 +17,7 @@ import ItemService from '../../../../service/ItemService';
 
 const FormItem = Form.Item;
 
-class PasswordPolicy extends PureComponent {
+class BidDetails extends PureComponent {
     state = {
         loadingData: false,
         spinLoading: false,
@@ -253,6 +253,6 @@ class PasswordPolicy extends PureComponent {
     }
 }
 
-const WrappedLocalAuthForm = Form.create()(PasswordPolicy);
+const WrappedLocalAuthForm = Form.create()(BidDetails);
 
 export default WrappedLocalAuthForm;

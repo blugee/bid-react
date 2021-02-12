@@ -16,18 +16,8 @@ class AuthService {
     return ApiHelper.getAuthenticated("validate-token", body);
   }
 
-  static async VerifyOTP(body) {
-    return ApiHelper.postAnonymousOTP("verify-otp", body);
-  }
-  static async VerifyEmail(body) {
-    return ApiHelper.putAuthenticated("forgotpassword-sendemail", body);
-  }
-  static async ResetPassword(body) {
-    return ApiHelper.putAuthenticated("forgotpassword", body);
-  }
-  static async ConfirmEmail(body) {
-    return ApiHelper.putAuthenticated("confirm-email", body);
-  }
+ 
+
   static async checkVpnProxy() {
     return ApiHelper.postAnonymousCheckVPN(apiURL.VPN_CONNECTION, '')
   }
@@ -39,9 +29,7 @@ class AuthService {
     }
     return null;
   }
-  static async PasswordPolicy(body) {
-    return ApiHelper.postAnonymous("password-policy", body);
-  }
+
 
 }
 export default AuthService;
