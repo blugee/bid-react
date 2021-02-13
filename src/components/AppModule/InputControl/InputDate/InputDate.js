@@ -28,7 +28,6 @@ class InputDate extends PureComponent {
 
         return (
 
-
             <Form.Item label={this.props.label} style={this.props.display ? '' : { display: 'none' }}>
                 {this.props.rangepicker ?
                     (

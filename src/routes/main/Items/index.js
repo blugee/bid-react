@@ -16,7 +16,6 @@ const title = 'Item List';
 const button = 'Add Item';
 
 class CustomerList extends PureComponent {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -32,41 +31,34 @@ class CustomerList extends PureComponent {
             },
         }
 
-
         const columns = [
             {
                 title: 'Item',
                 dataIndex: 'name',
-
             },
             {
                 title: 'Price',
                 dataIndex: 'price',
-
             },
             {
                 title: 'Thickness',
                 dataIndex: 'thickness',
-
             },
             {
                 title: 'Yield',
                 dataIndex: 'yield',
-
             },
             {
                 title: 'Labour',
                 dataIndex: 'labour',
-
             },
             {
                 title: 'Total',
                 dataIndex: 'total',
-
             },
             {
                 title: 'Actions',
-                render: (text, index) => <Actions data={index} handleDelete={() => this.handleDelete(index)} />
+                render: (text, index) => <Actions data={index} handleEdit={() => this.showConfirm(index)} handleDelete={() => this.handleDelete(index)} />
             },
         ];
 
@@ -74,6 +66,7 @@ class CustomerList extends PureComponent {
             title: title,
             columns: columns,
             button: button,
+            NotrowSelection:true,
             addNewDataUrl: urlConfig.SUPER_ADMIN_ITEMS_LIST_ADD,
             handleRefresh: this.handleRefresh,
             filterData: this.filterData,
@@ -109,31 +102,27 @@ class CustomerList extends PureComponent {
         } else {
             message.error(response.message);
             this.setState({ loadingData: false });
-
         }
     }
-
 
     handleRefresh = () => {
         this.setState({ data: [], loadingData: true });
         this.fetchData();
-
     };
 
     onSelectionChange = (selectedRowKeys, selectedRows) => {
         this.setState({ selectedRowKeys, selectedRows });
     };
 
-    showConfirm = type => {
+    showConfirm = data => {
         const that = this;
         this.setState({ visiblemodel: true })
-        if (type === 'edit') {
-            this.setState({
-                actionData: {
-                    message: <IntlMessages id="edit.entry" />, action: e => that.handleEdit(that.state.selectedRowKeys, that.state.selectedRows)
-                }
-            })
-        }
+        this.setState({
+            actionData: {
+                message: <IntlMessages id="edit.entry" />, action: e => that.handleEdit(data)
+            }
+        })
+
     };
 
     onActionChange = value => {
@@ -141,26 +130,24 @@ class CustomerList extends PureComponent {
         this.showConfirm(actionValue);
     };
 
-
     filterData = (data, value) =>
         data.filter(elem => {
             Object.keys(elem).some(key => elem[key] != null ? elem[key].toString().toLowerCase().includes(value) : "") ||
                 Object.keys(elem.name).some(key => elem.name[key] != null ? elem.name[key].toString().toLowerCase().includes(value) : "")
         });
 
-
-    handleEdit = (key, row) => {
+    handleEdit = ( row) => {
         this.setState({ loadingData: true });
         setTimeout(() => {
-            this.props.history.push({ pathname: urlConfig.SUPER_ADMIN_ITEMS_LIST_EDIT, state: { id: row[0].id } });
+            this.props.history.push({ pathname: urlConfig.SUPER_ADMIN_ITEMS_LIST_EDIT, state: { id: row.id } });
         }, 2000);
     };
+
     visibleModel = () => {
         this.setState({ visiblemodel: !this.state.visiblemodel })
     }
 
     render() {
-
         const { data } = this.state;
         var dups = [];
         var arr = data.filter(function (el) {
@@ -176,22 +163,11 @@ class CustomerList extends PureComponent {
             return;
         }
 
-        const menu = (
-            <Menu onClick={this.onActionChange}>
-                <Menu.Item key="edit">
-                    <Icon type="plus" />
-                    {<IntlMessages id="button.edit" />}
-                </Menu.Item>
-
-            </Menu>
-        );
-
         return (
             <React.Fragment>
                 <TableComponent
                     dataSource={data}
                     data={this.tableData}
-                    menu={menu}
                     selectData={arr}
                     loadingData={this.state.loadingData}
                     {...this.props}

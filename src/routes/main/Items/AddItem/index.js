@@ -22,7 +22,6 @@ class ItemDetails extends PureComponent {
         totalData: {}
     };
 
-
     componentWillMount() {
         this.fetchData();
     }
@@ -59,14 +58,11 @@ class ItemDetails extends PureComponent {
 
     }
 
-
-
     handleChange = (name, value) => {
         let data = this.state.totalData
         data[name] = value
         this.setState({ totalData: data })
     }
-
 
     handleSubmit = async (e) => {
         e.preventDefault();
@@ -93,7 +89,6 @@ class ItemDetails extends PureComponent {
         return total;
     }
 
-
     addItem = async (formData) => {
         var response;
         let total = await this.getTotal()
@@ -113,7 +108,6 @@ class ItemDetails extends PureComponent {
         } else {
             message.error(response.message);
             this.setState({ loadingData: false });
-
         }
     }
 
@@ -129,8 +123,6 @@ class ItemDetails extends PureComponent {
         }
         this.setState({ totalData: newData })
     }
-
-
 
     render() {
         const { form } = this.props;

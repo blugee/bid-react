@@ -36,31 +36,26 @@ class CustomerList extends PureComponent {
             {
                 title: 'Name',
                 dataIndex: 'name',
-
             },
             {
                 title: 'Company Name',
                 dataIndex: 'company_name',
-
             },
             {
                 title: 'Phone Number',
                 dataIndex: 'phone_number',
-
             },
             {
                 title: 'Email',
                 dataIndex: 'email',
-
             },
             {
                 title: 'Address',
                 dataIndex: 'address',
-
             },
             {
                 title: 'Actions',
-                render: (text, index) => <Actions data={index} handleDelete={() => this.handleDelete(index)} />
+                render: (text, index) => <Actions data={index} handleEdit={() => this.showConfirm(index)} handleDelete={() => this.handleDelete(index)} />
             },
         ];
 
@@ -68,6 +63,7 @@ class CustomerList extends PureComponent {
             title: title,
             columns: columns,
             button: button,
+            NotrowSelection: true,
             addNewDataUrl: urlConfig.SUPER_ADMIN_CUSTOMER_ADD,
             handleRefresh: this.handleRefresh,
             filterData: this.filterData,
@@ -114,16 +110,14 @@ class CustomerList extends PureComponent {
         this.setState({ selectedRowKeys, selectedRows });
     };
 
-    showConfirm = type => {
+    showConfirm = data => {
         const that = this;
         this.setState({ visiblemodel: true })
-        if (type === 'edit') {
-            this.setState({
-                actionData: {
-                    message: <IntlMessages id="edit.entry" />, action: e => that.handleEdit(that.state.selectedRowKeys, that.state.selectedRows)
-                }
-            })
-        }
+        this.setState({
+            actionData: {
+                message: <IntlMessages id="edit.entry" />, action: e => that.handleEdit(data)
+            }
+        })
     };
 
     onActionChange = value => {
@@ -138,10 +132,10 @@ class CustomerList extends PureComponent {
     ));
 
 
-    handleEdit = (key, row) => {
+    handleEdit = (row) => {
         this.setState({ loadingData: true });
         setTimeout(() => {
-            this.props.history.push({ pathname: urlConfig.SUPER_ADMIN_CUSTOMER_EDIT, state: { id: row[0].id } });
+            this.props.history.push({ pathname: urlConfig.SUPER_ADMIN_CUSTOMER_EDIT, state: { id: row.id } });
         }, 2000);
     };
 
@@ -150,29 +144,16 @@ class CustomerList extends PureComponent {
     }
 
     render() {
-
         const { data } = this.state;
-      
         if (!data) {
             return;
         }
-
-        const menu = (
-            <Menu onClick={this.onActionChange}>
-                <Menu.Item key="edit">
-                    <Icon type="plus" />
-                    {<IntlMessages id="button.edit" />}
-                </Menu.Item>
-
-            </Menu>
-        );
 
         return (
             <React.Fragment>
                 <TableComponent
                     dataSource={data}
                     data={this.tableData}
-                    menu={menu}
                     loadingData={this.state.loadingData}
                     {...this.props}
 

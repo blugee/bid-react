@@ -1,11 +1,5 @@
 import React, { PureComponent } from 'react';
-import {
-    Button,
-    Card,
-    Form,
-    message, Spin
-} from "antd";
-
+import { Button, Card, Form, message, Spin } from "antd";
 import AddBid from './AddBid';
 import BidService from '../../../../service/BidService';
 import * as urlConfig from '../../../../constants/URLConstant';
@@ -177,8 +171,6 @@ class BidDetails extends PureComponent {
         this.setState({ bidTax: value })
     }
 
-
-
     render() {
         const { form } = this.props;
         const { customerList, itemsList, bidData, lineItemsArr, bidTax } = this.state;
@@ -192,7 +184,6 @@ class BidDetails extends PureComponent {
                 sm: { span: 16 },
             },
         };
-
 
         return (
             <Card title='Add Bid'>

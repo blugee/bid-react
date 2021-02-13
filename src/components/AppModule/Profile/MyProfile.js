@@ -30,42 +30,27 @@ export class MyProfile extends Component {
                 last_name: '',
                 email: '',
                 mobile: '',
-                country_id: '',
-                state_id: '',
-                city_id: '',
             },
             loadingData: true,
             visible: false,
             uid: '',
-            departmentList: [],
-            countryList: [],
-            stateList: [],
-            cityList: [],
-            countyID: '',
-            stateId: '',
             country: false,
             data: [],
             loading: false,
             profile: null,
             role: '',
             submitted: '',
-            defaultImage: '',
-            cameraVisible: false,
-            mobileData: ''
         };
     }
     showOpenFileDlg = () => {
         this.inputOpenFileRef.current.click()
     }
 
-
     componentDidMount = async () => {
         this.setState({ loadingData: false })
         await this.fetchData();
         this.props.spinLoading()
     }
-
-
 
     fetchData = async () => {
         var profile = await AuthService.GetCurrentLoggedUserDetails();
@@ -79,8 +64,6 @@ export class MyProfile extends Component {
             message.error('Something wrong happened');
         }
     }
-
-
 
     openProfileModel = () => {
         this.setState({ visible: true })
@@ -96,13 +79,9 @@ export class MyProfile extends Component {
         const {
             id,
             user_name,
-            address,
             email,
-            mo_no,
-            city,
         } = this.state.userData;
 
-  
 
         return (
             <React.Fragment>
@@ -144,11 +123,6 @@ export class MyProfile extends Component {
                         />
                     </Col>
                 </Row>
-
-
-               
-               
-
                
             </React.Fragment >
         )

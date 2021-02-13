@@ -18,6 +18,3 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     CRYPTO_SECRET = "ss71AUVotev5geHS";
 }
 
-
-// export const VPN_CONNECTION ="https://api.ipdata.co?api-key=82537d89fc8d2eeb8e021fa690a7921e9b49c8475ac2cb0e293651dd";
-export const VPN_CONNECTION = "https://api.ipdata.co?api-key=302dfe833304031a8b463b68570efb291ec71bed37e1a87cafa96f0c";

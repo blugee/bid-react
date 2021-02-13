@@ -5,11 +5,9 @@ import { Form, Input } from "antd";
 
 export default class InputEmail extends Component {
 
-
     render() {
         const { getFieldDecorator } = this.props.field;
         return (
-
 
             <Form.Item label={<IntlMessages id={this.props.label} />}>
                 { this.props.isSpan ?
@@ -37,10 +35,7 @@ export default class InputEmail extends Component {
                         initialValue: this.props.initialValue
                     })(<Input />)
                 }
-
             </Form.Item>
-
-
 
         )
     }

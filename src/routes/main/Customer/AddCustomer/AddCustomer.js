@@ -21,10 +21,8 @@ class AddCustomer extends PureComponent {
         }
     }
 
-   
-
-    componentWillMount =  () => {
-         this.fetchData();
+    componentWillMount = () => {
+        this.fetchData();
     }
 
     fetchData = async () => {
@@ -56,11 +54,8 @@ class AddCustomer extends PureComponent {
         this.props.spinLoading()
     }
 
-
-
     render() {
         const { id, name, company_name, phone_number, email, address } = this.state.userData;
-
 
         return (
             <React.Fragment>
@@ -145,12 +140,6 @@ class AddCustomer extends PureComponent {
                         />
                     </Col>
                 </Row>
-
-
-
-
-
-
             </React.Fragment>
         );
     }

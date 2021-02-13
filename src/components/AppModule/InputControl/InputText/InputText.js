@@ -9,12 +9,9 @@ export default class InputText extends Component {
             this.props.onChange(this.props.name, e.target.value)
         }
     }
-
     render() {
         const { getFieldDecorator } = this.props.field;
         return (
-
-
             <Form.Item label={this.props.label} style={this.props.display ? '' : { display: 'none' }}>
                 {this.props.pattern ?
                     (this.props.inputNumber ?
@@ -57,7 +54,6 @@ export default class InputText extends Component {
                     )
                 }
             </Form.Item>
-
 
         )
     }

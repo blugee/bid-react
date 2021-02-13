@@ -1,11 +1,5 @@
 import React, { PureComponent } from 'react';
-import {
-    Button,
-    Card,
-    Form,
-    message, Spin
-} from "antd";
-
+import { Button, Card, Form, message, Spin } from "antd";
 import AddCustomer from './AddCustomer';
 import * as urlConfig from '../../../../constants/URLConstant';
 import IntlMessages from "../../../../util/IntlMessages";
@@ -22,9 +16,6 @@ class CustomerDetails extends PureComponent {
         totalData: {}
     };
 
-
-    
-
     handleSubmit = async (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -36,7 +27,6 @@ class CustomerDetails extends PureComponent {
         })
     };
 
-  
     addCustomer = async (formData) => {
         var response;
         if (formData.id)
@@ -55,7 +45,6 @@ class CustomerDetails extends PureComponent {
         }
     }
 
-
     render() {
         const { form } = this.props;
         const formItemLayout = {
@@ -68,7 +57,6 @@ class CustomerDetails extends PureComponent {
                 sm: { span: 15 },
             },
         };
-
 
         return (
             <Card title='Add Customer'>

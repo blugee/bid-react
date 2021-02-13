@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import IntlMessages from "../../../../util/IntlMessages";
-import { Form, Input } from "antd";
-
+import { Form } from "antd";
 
 export default class InputSpan extends Component {
-
 
     render() {
         const { getFieldDecorator } = this.props.field;
@@ -17,9 +15,7 @@ export default class InputSpan extends Component {
             wrapperCol = { wrapperCol: this.props.wrapperCol }
         }
         return (
-
-
-            <Form.Item {...labelCol} {...wrapperCol} label={<IntlMessages id={this.props.label} />}>
+            <Form.Item {...labelCol} {...wrapperCol} label={this.props.label}>
 
                 {getFieldDecorator(this.props.name, {
                     rules: [{
@@ -30,11 +26,7 @@ export default class InputSpan extends Component {
                 })(<span>{this.props.initialValue}</span>)
                 }
 
-
-
             </Form.Item>
-
-
 
         )
     }

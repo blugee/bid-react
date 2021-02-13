@@ -20,8 +20,6 @@ import ReactPlaceholder from "react-placeholder";
 import CircularProgress from "../../components/AppModule/CircularProgress";
 import UserContext from '../../contexts/UserContext';
 import RestrictedRoute from "../../util/RestrictedRoute";
-import { CHECKVPN } from "../../service/Apiconfig";
-import VPNService from '../../service/VPNService';
 import SessionWrong from "../../components/AppModule/ErrorPages/SessionWrong";
 import SignUp from "../../components/AppModule/Authentication/SignUp";
 
@@ -64,13 +62,11 @@ class App extends PureComponent {
   }
 
   setTimeout() {
-    // this.warnTimeout = setTimeout(this.warn, 16 * 1000);
     if (this.props.location.pathname === `/login`) {
     } else {
       this.props.setTime(Date.now())
       this.warnTimeout = setTimeout(this.logout, 60000 * 1000);
     }
-    // this.logoutTimeout = setTimeout(this.logout, 16 * 1000);
   }
 
   resetTimeout() {
@@ -79,7 +75,6 @@ class App extends PureComponent {
   }
 
   logout() {
-    // alert("You will be logged out automatically in 1 minute.");
     this.props.history.push(`/logout`);
   }
 
@@ -100,19 +95,13 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
-    // sessionFunction()
     this.validateToken();
     if (this.props.initURL === '') {
       this.props.setInitUrl(this.props.history.location.pathname);
     }
-
-    if (CHECKVPN) {
-      this.checkVPN();
-    }
   }
 
   validateToken = async () => {
-    // Validate token
     if (Session.session('userAccessToken')) {
       const userDetails = await AuthService.GetCurrentLoggedUserDetails();
 
@@ -121,29 +110,6 @@ class App extends PureComponent {
     } else {
       this.setState({ loading: false, authenticated: false })
     }
-  }
-
-
-  checkVPN() {
-    VPNService.checkVpnProxy()
-      .then(data => {
-        if (data && data.ip) {
-          Session.session('networkData', data);
-        }
-
-        if (data.threat && (data.threat.is_anonymous === true ||
-          data.threat.is_bogon === true ||
-          data.threat.is_known_abuser === true ||
-          data.threat.is_known_attacker === true ||
-          data.threat.is_proxy === true ||
-          data.threat.is_threat === true ||
-          data.threat.is_tor === true)) {
-          console.log("user is threat");
-          this.props.history.push(`/security-threat`);
-        }
-      }
-      ).catch(error => console.log(error));
-
   }
 
   setLayoutType = (layoutType) => {

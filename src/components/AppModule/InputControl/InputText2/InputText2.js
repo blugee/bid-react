@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input } from "antd";
+import { Form, Input, Row, Col } from "antd";
 
 
 export default class InputText2 extends Component {
@@ -12,9 +12,7 @@ export default class InputText2 extends Component {
     render() {
         const { getFieldDecorator } = this.props.field;
         return (
-
-
-            <Form.Item label={this.props.label} style={this.props.display ? '' : { display: 'none' }}>
+            <Form.Item label={this.props.label} wrapperCol={{ labelCol: 20 }} style={this.props.display ? '' : { display: 'none' }}>
                 {this.props.pattern ?
                     (this.props.inputNumber ?
                         (
@@ -35,7 +33,6 @@ export default class InputText2 extends Component {
                                 rules: [{
                                     pattern: this.props.pattern,
                                     message: this.props.validationMessage
-                                    // pattern: new RegExp(/^[0-9]*$/g),
                                 }, {
                                     required: true,
                                     message: this.props.requiredMessage,
@@ -56,8 +53,6 @@ export default class InputText2 extends Component {
                     )
                 }
             </Form.Item>
-
-
         )
     }
 }

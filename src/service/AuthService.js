@@ -15,12 +15,7 @@ class AuthService {
   static async ValidateToken(body) {
     return ApiHelper.getAuthenticated("validate-token", body);
   }
-
- 
-
-  static async checkVpnProxy() {
-    return ApiHelper.postAnonymousCheckVPN(apiURL.VPN_CONNECTION, '')
-  }
+  
   static GetCurrentLoggedUserDetails() {
     const userAccessToken = Session.session('userAccessToken');
     if (userAccessToken) {

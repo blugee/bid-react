@@ -4,12 +4,9 @@ import { Form, Input, Icon } from "antd";
 
 
 export default class InputPrefix extends Component {
-
-
     render() {
         const { getFieldDecorator } = this.props.field;
         return (
-
 
             <Form.Item label={this.props.label}>
                 {this.props.email ? (

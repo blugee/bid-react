@@ -14,6 +14,7 @@ import BidService from "../../../service/BidService";
 import Actions from "../Actions/Actions";
 import moment from "moment";
 import CustomerService from "../../../service/CustomerService";
+import { GeneratePDF } from "../Actions/GeneratePdf";
 
 const title = 'Bid List'
 const button = 'Add Bid'
@@ -43,8 +44,7 @@ class BidList extends PureComponent {
             },
             {
                 title: 'Bid Date',
-                dataIndex: 'bid_date',
-                render: (text, index) => index.bid_date ? moment(index.bid_date).format('DD/MM/YYYY') : null
+                dataIndex: 'bid_date1',
 
             },
             {
@@ -62,20 +62,22 @@ class BidList extends PureComponent {
                 dataIndex: 'notes',
 
             },
-
             {
                 title: 'Actions',
-                render: (text, index) => <Actions data={index} handleDelete={() => this.handleDelete(index)} />
+                width: 300,
+                render: (text, index) => <Actions data={index} isShowPdf={true} handlePdfClick={() => this.handlePdfClick(index, true)} handleEdit={() => this.showConfirm(index)} handleDelete={() => this.handleDelete(index)} />
             },
         ];
         this.tableData = {
             title: title,
             columns: columns,
             button: button,
+            NotrowSelection: true,
             addNewDataUrl: urlConfig.SUPER_ADMIN_ADD_BID_LIST,
             handleRefresh: this.handleRefresh,
             filterData: this.filterData,
-            onSelectionChange: this.onSelectionChange
+            onSelectionChange: this.onSelectionChange,
+            generatePdf: this.handlePdfClick
         }
     }
 
@@ -107,23 +109,34 @@ class BidList extends PureComponent {
         return data
     }
 
-    formatData = (data, customerList) => {
-
+    formatData = ( data, customerList) => {
         return data.map((item, i) => {
             let customerName = ''
+            let bid_date = ''
             if (customerList && customerList.length > 0) {
                 let product = customerList.filter(prod => prod.id === item.customer_id)
                 if (product.length > 0) customerName = product[0].name
             }
+            if(item.bid_date){
+                bid_date =  moment(new Date(item.bid_date)).format('DD/MM/YYYY')
+            }
             return {
                 ...item,
+                bid_date1: bid_date,
                 customer: customerName
             };
         });
 
     }
 
-
+    handlePdfClick = async ( data, isSingle) => {
+        this.setState({ loadingData: true });
+        if (!isSingle) {
+            data = this.state.data
+        }
+        await GeneratePDF(data, !isSingle)
+        this.setState({ loadingData: false });
+    }
 
     handleDelete = async (data) => {
         this.setState({ loadingData: true });
@@ -141,9 +154,6 @@ class BidList extends PureComponent {
         }
     }
 
-
-
-
     handleRefresh = () => {
         this.setState({ data: [], loadingData: true });
         this.fetchData();
@@ -155,12 +165,12 @@ class BidList extends PureComponent {
     };
 
 
-    showConfirm = type => {
+    showConfirm = data => {
         const that = this;
         this.setState({ visiblemodel: true })
         this.setState({
             actionData: {
-                message: <IntlMessages id="edit.entry" />, action: e => that.handleEdit(that.state.selectedRowKeys, that.state.selectedRows)
+                message: <IntlMessages id="edit.entry" />, action: e => that.handleEdit(data)
             }
         })
     };
@@ -176,10 +186,10 @@ class BidList extends PureComponent {
     ));
 
 
-    handleEdit = (key, row) => {
+    handleEdit = (row) => {
         this.setState({ loadingData: true });
         setTimeout(() => {
-            this.props.history.push({ pathname: urlConfig.SUPER_ADMIN_EDIT_BID_LIST, state: { id: row[0].id } });
+            this.props.history.push({ pathname: urlConfig.SUPER_ADMIN_EDIT_BID_LIST, state: { id: row.id } });
         }, 2000);
 
     };
@@ -189,29 +199,16 @@ class BidList extends PureComponent {
     }
 
     render() {
-
         const { data } = this.state;
-
         if (!data) {
             return;
         }
-
-
-        const menu = (
-            <Menu onClick={this.onActionChange}>
-                <Menu.Item key="edit">
-                    <Icon type="plus" />
-                    {<IntlMessages id="button.edit" />}
-                </Menu.Item>
-            </Menu>
-        );
 
         return (
             <React.Fragment>
                 <TableComponent
                     dataSource={data}
                     data={this.tableData}
-                    menu={menu}
                     loadingData={this.state.loadingData}
                     {...this.props}
                 />

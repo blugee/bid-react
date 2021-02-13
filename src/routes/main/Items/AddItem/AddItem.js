@@ -33,10 +33,8 @@ class AddItem extends PureComponent {
         this.props.handleChange(name, value)
     }
 
-
     render() {
         const { id, name, thickness, labour, price } = this.props.userData;
-
 
         return (
             <React.Fragment>
@@ -148,9 +146,6 @@ class AddItem extends PureComponent {
                         />
                     </Col>
                 </Row>
-
-
-
             </React.Fragment>
         );
     }

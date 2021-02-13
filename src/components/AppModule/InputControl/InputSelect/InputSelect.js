@@ -7,10 +7,8 @@ export default class InputSelect extends PureComponent {
     handleChange = (e) => {
         if (this.props.onChange) {
             this.props.onChange(e)
-            // console.log(e.target.value)
         }
     }
-
 
     render() {
         const { getFieldDecorator } = this.props.field;
@@ -19,9 +17,7 @@ export default class InputSelect extends PureComponent {
             labelCol = { labelCol: this.props.labelCol }
         }
         return (
-
             <Form.Item {...labelCol} label={this.props.label}>
-
                 {getFieldDecorator(this.props.name, {
                     rules: [{
                         required: true,
@@ -36,6 +32,7 @@ export default class InputSelect extends PureComponent {
                         showSearch={this.props.showSearch ? true : false}
                         onSelect={(e) => this.handleChange(e)}
                         onDeselect={(e) => this.handleChange(e)}
+                        style={this.props.styles ? this.props.styles : {}}
                         filterOption={(input, option) =>
                             option.props.children.toLowerCase().startsWith(input.toLowerCase())
                         }

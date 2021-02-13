@@ -47,9 +47,6 @@ class Profile extends PureComponent {
     },
     validation: false
   };
-  componentDidMount() {
-
-  }
 
   updateProfile = async (formData) => {
     this.setState({ loadingData: true });
@@ -74,8 +71,6 @@ class Profile extends PureComponent {
     });
   };
 
-
-
   handleRevert = () => {
     this.setState(prevState => {
       return {
@@ -98,7 +93,7 @@ class Profile extends PureComponent {
     });
   };
 
- 
+
   visibleModel = () => {
     this.setState({ visiblemodel: !this.state.visiblemodel })
   }
@@ -146,7 +141,7 @@ class Profile extends PureComponent {
                   {<IntlMessages id="button.back" />}
                 </Button>
               </FormItem>
-             
+
             </Form>
           </div>
 
